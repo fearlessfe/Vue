@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>component</title>
+	<link rel="stylesheet" href="css/componentStyle.css">
+	<script src='libs/vue.js'></script>
+</head>
+<body>
+	<div id="app">
+		<h2>自定义的下拉框</h2>
+		<table>
+			<tr is="custom-select"></tr>
+		</table>
+		<!-- <custom-select btn-value="搜索"></custom-select> -->
+		<h2>自定义的下拉框2</h2>
+		<!-- 利用props传递数据 -->
+		<custom-select btn-value="查询"></custom-select>
+	</div>
+	<script src='js/componentApp.js'></script>
+	<script>
+		//注册组件
+		Vue.component("customSelect",{
+			data:function () {
+				return {
+					selectShow:false
+				};
+			},
+			props:["btnValue"],
+			template:`<section class="warp">
+					<div class="searchIpt clearFix">
+						<div class="clearFix">
+							<input type="text" class="keyWord" value="" @click="selectShow = !selectShow"/>
+							<input type="button" :value="btnValue" >
+							<span></span>
+						</div>
+						<custom-list v-show="selectShow"></custom-list>
+					</div>
+				</section>`
+		});
+
+		Vue.component("customList",{
+			template:`<ul class="list" >
+							<li>html+css</li>
+							<li>html5+css3</li>
+							<li>javascript</li>
+							<li>angular</li>
+							<li>react</li>
+							<li>vue</li>
+							<li>jquery</li>
+							<li>nodejs</li>
+						</ul>`
+		});
+		new Vue({
+			el:"#app",
+		})
+	</script>
+</body>
+</html>

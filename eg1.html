@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>eg1</title>
+	<script src='libs/vue.js'></script>
+</head>
+<body>
+	<!-- v-bind:可省略为 :,v-on可省略为@ -->
+	<div id="demo">
+		<input type="text" v-model="message">
+		<p @click="clickHandle" :cutomid="id">{{message}}</p>
+	</div>
+
+	<script>
+	let data = {
+		message: "hello Vue!",
+		id: 222,
+
+	}
+	
+
+	new Vue({
+		el: "#demo",
+		data: data,
+		
+		methods:{
+			clickHandle(){
+				alert('click')
+			}
+		},
+		render(createElement){
+			return createElement(
+				"ul",
+				{
+					class:{
+						bg:true,
+					},
+					style:{
+						fontSize:"50px",
+					},
+					attr:{
+						abc:"hahah",
+					},
+					domProps:{
+						innerHTML:"<li>I am html<li>",
+					},
+				},
+				[
+					createElement("li",1),
+					createElement("li",2),
+					createElement("li",13),
+				]
+			);
+		}
+	});
+	</script>
+</body>
+</html>
